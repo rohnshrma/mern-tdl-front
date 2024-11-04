@@ -1,7 +1,13 @@
+// Defining an array named tasksData, which holds multiple objects.
+// Each object represents a task with specific details.
+
 const tasksData = [
   {
+    // Unique identifier for the task
     id: 1,
+    // Name of the task
     name: "Eat",
+    // Brief description of the task
     description: "Have your breakfast.",
   },
   {
@@ -26,4 +32,5 @@ const tasksData = [
   },
 ];
 
+// Exporting tasksData so it can be imported and used in other files
 export default tasksData;
