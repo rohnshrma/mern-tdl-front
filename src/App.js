@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 
 // Importing the Header component from the Components folder
 import Header from "./Components/Header";
+import ShowTime from "./Components/ShowTime";
 
 // Importing the Tasks component from the Components folder
 import Tasks from "./Components/Tasks";
@@ -23,7 +24,9 @@ const App = () => {
       {/* Rendering the Tasks component and passing the tasksData as a prop */}
       {/* <Tasks tasks={tasksData} /> */}
 
-      <Counter />
+      {/* <Counter /> */}
+
+      <ShowTime />
 
       {/* Rendering the Footer component */}
       <Footer />
