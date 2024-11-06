@@ -1,5 +1,6 @@
 // Importing the Footer component from the Components folder
 import Counter from "./Components/Counter";
+import CreateArea from "./Components/CreateArea";
 import Footer from "./Components/Footer";
 
 // Importing the Header component from the Components folder
@@ -24,9 +25,7 @@ const App = () => {
       {/* Rendering the Tasks component and passing the tasksData as a prop */}
       {/* <Tasks tasks={tasksData} /> */}
 
-      {/* <Counter /> */}
-
-      <ShowTime />
+      <CreateArea />
 
       {/* Rendering the Footer component */}
       <Footer />

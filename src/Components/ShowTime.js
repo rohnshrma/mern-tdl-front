@@ -1,14 +1,19 @@
+import { useState } from "react";
+
 const ShowTime = () => {
-  var time = new Date().toLocaleTimeString();
+  const [time, setTime] = useState("Time");
 
   const clickHandler = () => {
-    time = new Date().toLocaleTimeString();
-    console.log(time);
+    const currentTime = new Date().toLocaleTimeString();
+    setTime(currentTime);
   };
+
+  setInterval(clickHandler, 1000);
+
   return (
     <div className="showtime">
       <h2>{time}</h2>
-      <button onClick={clickHandler}>Show Time</button>
+      {/* <button onClick={clickHandler}>Show Time</button> */}
     </div>
   );
 };
