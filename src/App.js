@@ -1,4 +1,5 @@
 // Importing the Counter component from the Components folder
+import { useState } from "react";
 import Counter from "./Components/Counter";
 
 // Importing the CreateArea component from the Components folder
@@ -21,12 +22,22 @@ import tasksData from "./data";
 
 // Defining the main App component as an arrow function
 const App = () => {
+  const [allTasks, setAllTasks] = useState([]);
+
   // Defining addTaskHandler function to handle adding a new task
   // The function accepts a parameter 'taskObj' which represents the new task object
   const addTaskHandler = (taskObj) => {
     // Logging the incoming task data to the console for debugging or monitoring
     console.log("Incoming Data =>", taskObj);
+
+    setAllTasks((prevAllTasks) => {
+      console.log("PREV ALL TASKS =>", prevAllTasks);
+
+      return [taskObj, ...prevAllTasks];
+    });
   };
+
+  console.log("ALL TASKS => ", allTasks);
 
   // Returning JSX (JavaScript XML), a syntax for writing HTML in JavaScript, to define the UI of the App component
   return (
