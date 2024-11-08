@@ -1,58 +1,57 @@
-// Importing the Counter component from the Components folder
+// Importing the useState hook from React to manage component state
+// Importing various components from the Components folder for rendering different parts of the UI
 import { useState } from "react";
 import Counter from "./Components/Counter";
-
-// Importing the CreateArea component from the Components folder
 import CreateArea from "./Components/CreateArea";
-
-// Importing the Footer component from the Components folder
 import Footer from "./Components/Footer";
-
-// Importing the Header component from the Components folder
 import Header from "./Components/Header";
-
-// Importing the ShowTime component from the Components folder
 import ShowTime from "./Components/ShowTime";
-
-// Importing the Tasks component from the Components folder
 import Tasks from "./Components/Tasks";
 
-// Importing tasksData, which is an array of task data, from the data file
-import tasksData from "./data";
+// Optional: Uncomment the following line to import an initial array of task data if needed
+// import tasksData from "./data";
 
-// Defining the main App component as an arrow function
+// Main App component definition using an arrow function
 const App = () => {
+  // Defining a state variable 'allTasks' to hold the list of tasks
+  // 'setAllTasks' is a function to update 'allTasks'
   const [allTasks, setAllTasks] = useState([]);
 
-  // Defining addTaskHandler function to handle adding a new task
-  // The function accepts a parameter 'taskObj' which represents the new task object
+  // Function to handle adding a new task to the 'allTasks' state
+  // 'taskObj' is an object that contains the data of the new task being added
   const addTaskHandler = (taskObj) => {
-    // Logging the incoming task data to the console for debugging or monitoring
-    console.log("Incoming Data =>", taskObj);
+    // Logging the new task object to the console for debugging
+    console.log("Incoming Task:", taskObj);
 
+    // Updating the 'allTasks' state using setAllTasks
+    // The 'prevAllTasks' parameter represents the previous state (list of tasks) before the update
     setAllTasks((prevAllTasks) => {
-      console.log("PREV ALL TASKS =>", prevAllTasks);
+      console.log("Previous Tasks:", prevAllTasks);
 
+      // Returning a new array with 'taskObj' added at the beginning
+      // '[taskObj, ...prevAllTasks]' creates a new array where 'taskObj' is first, followed by all previous tasks
       return [taskObj, ...prevAllTasks];
     });
   };
 
-  console.log("ALL TASKS => ", allTasks);
+  // Logging the current 'allTasks' state to the console to check the updated list of tasks
+  console.log("Current Tasks:", allTasks);
 
-  // Returning JSX (JavaScript XML), a syntax for writing HTML in JavaScript, to define the UI of the App component
+  // Returning JSX, a syntax that allows us to write HTML in JavaScript, to structure the UI of the App component
   return (
-    // Main container div for the App component, with a class name of "app" for styling purposes
+    // Wrapping the entire app in a div with the class "app" for styling purposes
     <div className="app">
       {/* Rendering the Header component at the top of the App */}
       <Header />
 
-      {/* Rendering the Tasks component and passing the tasksData array as a prop */}
-      {/* The Tasks component will use tasksData to display each task */}
-      {/* <Tasks tasks={tasksData} /> */}
-
-      {/* Rendering the CreateArea component and passing addTaskHandler as a prop called 'onAdd' */}
-      {/* This will allow CreateArea to trigger addTaskHandler when a new task is created */}
+      {/* Rendering the CreateArea component, which allows users to create new tasks.
+          Passing the 'addTaskHandler' function as a prop named 'onAdd' so that
+          CreateArea can use it to add new tasks to the task list */}
       <CreateArea onAdd={addTaskHandler} />
+
+      {/* Rendering the Tasks component, which displays the list of tasks.
+          Passing the current 'allTasks' state as a prop named 'tasks' for display */}
+      <Tasks tasks={allTasks} />
 
       {/* Rendering the Footer component at the bottom of the App */}
       <Footer />
@@ -60,5 +59,5 @@ const App = () => {
   );
 };
 
-// Exporting the App component to make it available for import in other files
+// Exporting the App component so it can be imported and used in other parts of the project
 export default App;

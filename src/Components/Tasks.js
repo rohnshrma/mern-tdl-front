@@ -20,7 +20,7 @@ const Tasks = (props) => {
               // Passing the task's name to the Task component as a prop
               name={taskObj.name}
               // Passing the task's description to the Task component as a prop
-              description={taskObj.description}
+              desc={taskObj.desc}
               // Using a unique key for each Task component for React to manage the list efficiently
               key={taskObj.id}
               // Passing the task's id to the Task component as a prop

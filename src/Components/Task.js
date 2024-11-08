@@ -14,7 +14,7 @@ const Task = (props) => {
       <h4>{props.name}</h4>
 
       {/* Displaying the description of the task using the description prop */}
-      <p>{props.description}</p>
+      <p>{props.desc}</p>
 
       {/* Displaying a button with a trash icon (FaTrashAlt) inside it */}
       <button>

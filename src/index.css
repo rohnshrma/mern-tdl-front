@@ -65,7 +65,7 @@ footer {
 .task {
   background-color: var(--white);
   box-shadow: 0 0 4px 0 #000;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 4px;
   overflow: hidden;
   position: relative;
