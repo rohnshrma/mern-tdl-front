@@ -25,6 +25,8 @@ const Tasks = (props) => {
               key={taskObj.id}
               // Passing the task's id to the Task component as a prop
               id={taskObj.id}
+              // Passing the onDelete function from props to allow individual tasks to trigger a delete action
+              onDelete={props.onDelete}
             />
           );
         })

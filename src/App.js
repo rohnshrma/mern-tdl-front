@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import ShowTime from "./Components/ShowTime";
 import Tasks from "./Components/Tasks";
+import { v4 as uuidv4 } from "uuid";
 
 // Optional: Uncomment the following line to import an initial array of task data if needed
 // import tasksData from "./data";
@@ -30,7 +31,21 @@ const App = () => {
 
       // Returning a new array with 'taskObj' added at the beginning
       // '[taskObj, ...prevAllTasks]' creates a new array where 'taskObj' is first, followed by all previous tasks
-      return [taskObj, ...prevAllTasks];
+      return [{ id: uuidv4(), ...taskObj }, ...prevAllTasks];
+    });
+  };
+
+  // Function to handle deleting a task from the 'allTasks' state
+  // 'deleteId' represents the unique ID of the task to be deleted
+  const deleteTaskHandler = (deleteId) => {
+    // Updating the 'allTasks' state by filtering out the task with the matching ID
+    setAllTasks((prevAllTasks) => {
+      return prevAllTasks.filter((taskObj) => {
+        // Logging each task's ID and the deleteId for debugging
+        console.log(taskObj.id, deleteId, taskObj.id !== deleteId);
+        // Only keeping tasks whose IDs do not match deleteId
+        return taskObj.id !== deleteId;
+      });
     });
   };
 
@@ -50,8 +65,9 @@ const App = () => {
       <CreateArea onAdd={addTaskHandler} />
 
       {/* Rendering the Tasks component, which displays the list of tasks.
-          Passing the current 'allTasks' state as a prop named 'tasks' for display */}
-      <Tasks tasks={allTasks} />
+          Passing the current 'allTasks' state as a prop named 'tasks' for display
+          and 'deleteTaskHandler' as a prop named 'onDelete' to enable task deletion */}
+      <Tasks tasks={allTasks} onDelete={deleteTaskHandler} />
 
       {/* Rendering the Footer component at the bottom of the App */}
       <Footer />

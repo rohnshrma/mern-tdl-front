@@ -24,6 +24,8 @@ const CreateArea = (props) => {
     setName(e.target.value);
   };
 
+  console.log("PROPS => ", props);
+
   // Defining a function to handle changes to the task description input
   // This function will be called whenever the user types in the description input box
   const descChangeHandler = (e) => {

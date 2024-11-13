@@ -3,9 +3,6 @@ import { FaTrashAlt } from "react-icons/fa";
 
 // Defining the Task component, which receives props as a parameter
 const Task = (props) => {
-  // Logging the FaTrashAlt icon component to the console (for debugging purposes)
-  console.log(FaTrashAlt);
-
   // Returning JSX to define the structure of the Task component
   return (
     // Main container div for the Task component, with a class name of "task"
@@ -17,7 +14,13 @@ const Task = (props) => {
       <p>{props.desc}</p>
 
       {/* Displaying a button with a trash icon (FaTrashAlt) inside it */}
-      <button>
+      <button
+        // Attaching an onClick event to the button that calls the onDelete function from props
+        // When clicked, it triggers the delete action for the task with the given ID
+        onClick={() => {
+          props.onDelete(props.id);
+        }}
+      >
         {/* Rendering the FaTrashAlt icon component, which represents a trash/delete icon */}
         {<FaTrashAlt />}
       </button>
