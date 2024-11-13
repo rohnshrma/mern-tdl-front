@@ -1,5 +1,6 @@
 // Importing the useState function from React, which helps us manage and update component data (state)
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // Defining the CreateArea component as a function
 // This component will allow the user to input and submit a new task
@@ -45,6 +46,7 @@ const CreateArea = (props) => {
     const taskObj = {
       name, // task name
       desc, // task description
+      id: uuidv4(),
     };
 
     // Logging the task object to the console for debugging

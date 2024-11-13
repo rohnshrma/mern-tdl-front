@@ -7,7 +7,6 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import ShowTime from "./Components/ShowTime";
 import Tasks from "./Components/Tasks";
-import { v4 as uuidv4 } from "uuid";
 
 // Optional: Uncomment the following line to import an initial array of task data if needed
 // import tasksData from "./data";
@@ -31,7 +30,7 @@ const App = () => {
 
       // Returning a new array with 'taskObj' added at the beginning
       // '[taskObj, ...prevAllTasks]' creates a new array where 'taskObj' is first, followed by all previous tasks
-      return [{ id: uuidv4(), ...taskObj }, ...prevAllTasks];
+      return [taskObj, ...prevAllTasks];
     });
   };
 
