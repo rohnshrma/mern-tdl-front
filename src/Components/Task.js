@@ -17,9 +17,7 @@ const Task = (props) => {
       <button
         // Attaching an onClick event to the button that calls the onDelete function from props
         // When clicked, it triggers the delete action for the task with the given ID
-        onClick={() => {
-          props.onDelete(props.id);
-        }}
+        onClick={() => props.onDelete(props.id)}
       >
         {/* Rendering the FaTrashAlt icon component, which represents a trash/delete icon */}
         {<FaTrashAlt />}
