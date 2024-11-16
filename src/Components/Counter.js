@@ -15,13 +15,16 @@ const Counter = () => {
 
   const handleClick = () => {
     // Defining a function named handleClick to handle button clicks.
-    setCountData((prevCountData) => {
-      console.log(prevCountData.count);
-      return {
-        // count: prevCountData.count + 1,
-        count: countData.count + 1,
-      };
-    });
+    // setCountData((prevCountData) => {
+    //   console.log(prevCountData.count);
+    //   return {
+    //     // count: prevCountData.count + 1,
+    //     count: countData.count + 1,
+    //   };
+    // });
+
+    // setCountData({ count: countData.count + 1 });
+
     // Updating the 'count'state by incrementing it by 1 using the 'setCount' function.
     // The use of `count += 1` in setCount is unconventional and not recommended; `setCount(count + 1)` is preferred.
     console.log(countData);

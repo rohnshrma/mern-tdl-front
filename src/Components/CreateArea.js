@@ -5,36 +5,29 @@ import { v4 as uuidv4 } from "uuid";
 // Defining the CreateArea component as a function
 // This component will allow the user to input and submit a new task
 const CreateArea = (props) => {
-  // Defining a "name" state variable to store the task's name
-  // "setName" is a function that allows us to update "name"
-  // Initially, "name" is set to an empty string ("")
-  const [name, setName] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+  });
 
-  // Defining a "desc" (description) state variable to store the task's description
-  // "setDesc" allows us to update "desc"
-  // Initially, "desc" is also set to an empty string ("")
-  const [desc, setDesc] = useState("");
-
-  // Defining a function to handle changes to the task name input
-  // This function will be called whenever the user types in the name input box
   const nameChangeHandler = (e) => {
-    // Logging the current value of the input to the console for debugging
-    console.log(e.target.value);
-
-    // Updating the "name" state with the current value of the input
-    setName(e.target.value);
+    const nameInput = e.target.value;
+    setFormData((prevFormData) => {
+      return {
+        name: nameInput,
+        description: prevFormData.description,
+      };
+    });
   };
 
-  console.log("PROPS => ", props);
-
-  // Defining a function to handle changes to the task description input
-  // This function will be called whenever the user types in the description input box
   const descChangeHandler = (e) => {
-    // Logging the current value of the input to the console for debugging
-    console.log(e.target.value);
-
-    // Updating the "desc" state with the current value of the input
-    setDesc(e.target.value);
+    const descriptionInput = e.target.value;
+    setFormData((prevFormData) => {
+      return {
+        name: prevFormData.name,
+        description: descriptionInput,
+      };
+    });
   };
 
   // Defining a function to handle the form submission (when the user clicks "Add Task")
@@ -44,8 +37,7 @@ const CreateArea = (props) => {
 
     // Creating an object that combines the task's name and description
     const taskObj = {
-      name, // task name
-      desc, // task description
+      ...formData,
       id: uuidv4(),
     };
 
