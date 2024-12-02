@@ -1,42 +1,46 @@
-// Importing React, which is necessary for using JSX and creating components
+// Importing React, which is necessary to use JSX and create components.
 import React from "react";
 
-// Importing the Task component, which will represent each individual task
+// Importing the Task component, which will represent each individual task in the task list.
 import Task from "./Task";
 
-// Defining the Tasks component, which receives props as a parameter
+// Defining the `Tasks` component as a functional component.
+// This component receives `props` as a parameter, which contains the tasks data and functions passed from the parent component.
 const Tasks = (props) => {
-  // Returning JSX for the component
+  // Returning JSX to define the structure of the `Tasks` component.
   return (
-    // Main container div for the Tasks component, with a class name of "tasks"
+    // Main container for the list of tasks, styled using the "tasks" CSS class.
     <div className="tasks">
-      {/* Checking if there are tasks in the props. If props.tasks exists and is not empty, map over it */}
-      {props.tasks ? (
-        // Using the map function to go through each task object in the tasks array
+      {/* Checking if the tasks array (`props.tasks`) exists and is not empty. */}
+      {props.tasks && props.tasks.length > 0 ? (
+        // Mapping over the tasks array to create a list of `Task` components.
         props.tasks.map((taskObj) => {
-          // Returning a Task component for each task in the array
+          // For each task object in the array, return a `Task` component.
           return (
             <Task
-              // Passing the task's name to the Task component as a prop
-              name={taskObj.name}
-              // Passing the task's description to the Task component as a prop
-              description={taskObj.description}
-              // Using a unique key for each Task component for React to manage the list efficiently
+              // Passing the task's title to the `Task` component as a prop named `name`.
+              name={taskObj.title}
+              // Passing the task's completion status as a prop named `status`.
+              // If `taskObj.completed` is true, display "DONE ✅"; otherwise, show "Pending❓".
+              status={taskObj.completed ? "DONE ✅" : "Pending❓"}
+              // Providing a unique key for each `Task` component using the task's ID.
+              // React uses this key to efficiently manage and update the list.
               key={taskObj.id}
-              // Passing the task's id to the Task component as a prop
+              // Passing the task's ID to the `Task` component as a prop named `id`.
               id={taskObj.id}
-              // Passing the onDelete function from props to allow individual tasks to trigger a delete action
+              // Passing the `onDelete` function (received via props) to the `Task` component.
+              // This allows the `Task` component to trigger a delete action when necessary.
               onDelete={props.onDelete}
             />
           );
         })
       ) : (
-        // If props.tasks is empty or undefined, display a message indicating no tasks were found
+        // If there are no tasks (empty array or undefined), display a message to the user.
         <h2>No Tasks Found</h2>
       )}
     </div>
   );
 };
 
-// Exporting the Tasks component so it can be imported and used in other files
+// Exporting the `Tasks` component so it can be used in other parts of the application.
 export default Tasks;

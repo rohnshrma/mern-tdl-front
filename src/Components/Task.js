@@ -1,30 +1,29 @@
-// Importing the FaTrashAlt icon from the react-icons library
+// Importing the `FaTrashAlt` icon from the `react-icons` library.
+// This icon will be used to represent the delete action for each task.
 import { FaTrashAlt } from "react-icons/fa";
 
-// Defining the Task component, which receives props as a parameter
+// Defining the `Task` component as a functional component.
+// This component receives `props` as a parameter, which contains data and functions related to a specific task.
 const Task = (props) => {
-  // Returning JSX to define the structure of the Task component
+  // Returning JSX to define the structure of an individual task.
   return (
-    // Main container div for the Task component, with a class name of "task"
+    // Main container for the `Task` component, styled using the "task" CSS class.
     <div className="task">
-      {/* Displaying the name of the task using the name prop */}
+      {/* Displaying the name/title of the task using the `name` prop. */}
       <h4>{props.name}</h4>
 
-      {/* Displaying the description of the task using the description prop */}
-      <p>{props.description}</p>
+      {/* Displaying the task's status (e.g., "DONE ✅" or "Pending❓") using the `status` prop. */}
+      <p>Status: {props.status}</p>
 
-      {/* Displaying a button with a trash icon (FaTrashAlt) inside it */}
-      <button
-        // Attaching an onClick event to the button that calls the onDelete function from props
-        // When clicked, it triggers the delete action for the task with the given ID
-        onClick={() => props.onDelete(props.id)}
-      >
-        {/* Rendering the FaTrashAlt icon component, which represents a trash/delete icon */}
-        {<FaTrashAlt />}
+      {/* Button for deleting the task. 
+          The button contains an onClick event handler that calls the `onDelete` function.
+          When clicked, it deletes the task with the ID provided in the `id` prop. */}
+      <button onClick={() => props.onDelete(props.id)}>
+        {/* Rendering the `FaTrashAlt` icon inside the button to visually represent the delete action. */}
+        <FaTrashAlt />
       </button>
     </div>
   );
 };
 
-// Exporting the Task component so it can be imported and used in other files
-export default Task;
+// Exporting the `Task` component so it can be imported and used in other

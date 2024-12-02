@@ -1,6 +1,9 @@
-// Importing the useState hook from React to manage component state
-// Importing various components from the Components folder for rendering different parts of the UI
-import { useState } from "react";
+// Importing the `useEffect` and `useState` hooks from React.
+// `useState` allows us to add state to our functional component,
+// while `useEffect` helps us manage side effects (e.g., data fetching or subscriptions).
+import { useEffect, useState } from "react";
+
+// Importing various UI components from the 'Components' folder to structure the app.
 import Counter from "./Components/Counter";
 import CreateArea from "./Components/CreateArea";
 import Footer from "./Components/Footer";
@@ -9,74 +12,95 @@ import ShowTime from "./Components/ShowTime";
 import Tasks from "./Components/Tasks";
 import Weather from "./Components/Weather";
 
-// Optional: Uncomment the following line to import an initial array of task data if needed
+// Optional: Uncomment this line if you have a predefined array of task data to use as an initial state.
 // import tasksData from "./data";
 
-// Main App component definition using an arrow function
+// Main `App` component defined as an arrow function.
 const App = () => {
-  // Defining a state variable 'allTasks' to hold the list of tasks
-  // 'setAllTasks' is a function to update 'allTasks'
+  // **State Declaration**
+  // `allTasks`: Holds the list of all tasks. Initially, it is an empty array `[]`.
+  // `setAllTasks`: Function to update the value of `allTasks`.
   const [allTasks, setAllTasks] = useState([]);
 
-  // Function to handle adding a new task to the 'allTasks' state
-  // 'taskObj' is an object that contains the data of the new task being added
+  // **useEffect Hook**
+  // `useEffect` runs side effects in React. In this case, it fetches task data from an API when the component loads.
+  useEffect(() => {
+    console.log("fetching tasks");
+
+    // An async function to fetch tasks from a public API.
+    const fetchTasks = async () => {
+      try {
+        // Sending a GET request to fetch task data from the API.
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/todos"
+        );
+
+        // Parsing the response data to JSON format.
+        const data = await response.json();
+
+        // Updating the state (`allTasks`) with the fetched task data.
+        setAllTasks(data);
+      } catch (err) {
+        // Handling errors (e.g., network issues) and logging them to the console.
+        console.error(err);
+      }
+    };
+
+    // Calling the async function to initiate the data fetch.
+    fetchTasks();
+  }, []); // **Dependency Array**
+  // The empty array `[]` means this effect runs only once when the component mounts.
+
+  // **Add Task Handler**
+  // Function to add a new task to the list of tasks (`allTasks`).
   const addTaskHandler = (taskObj) => {
-    // Logging the new task object to the console for debugging
     console.log("Incoming Task:", taskObj);
 
-    // Updating the 'allTasks' state using setAllTasks
-    // The 'prevAllTasks' parameter represents the previous state (list of tasks) before the update
+    // Updating the state by adding the new task (`taskObj`) to the beginning of the array.
     setAllTasks((prevAllTasks) => {
       console.log("Previous Tasks:", prevAllTasks);
-
-      // Returning a new array with 'taskObj' added at the beginning
-      // '[taskObj, ...prevAllTasks]' creates a new array where 'taskObj' is first, followed by all previous tasks
       return [taskObj, ...prevAllTasks];
     });
   };
 
-  // Function to handle deleting a task from the 'allTasks' state
-  // 'deleteId' represents the unique ID of the task to be deleted
+  // **Delete Task Handler**
+  // Function to delete a task based on its unique ID (`deleteId`).
   const deleteTaskHandler = (deleteId) => {
-    // Updating the 'allTasks' state by filtering out the task with the matching ID
+    // Using `filter` to create a new array excluding the task with the matching ID.
     setAllTasks((prevAllTasks) => {
       return prevAllTasks.filter((taskObj) => {
-        // Logging each task's ID and the deleteId for debugging
         console.log(taskObj.id, deleteId, taskObj.id !== deleteId);
-        // Only keeping tasks whose IDs do not match deleteId
         return taskObj.id !== deleteId;
       });
     });
   };
 
-  // Logging the current 'allTasks' state to the console to check the updated list of tasks
-  console.log("Current Tasks:", allTasks);
-
-  // Returning JSX, a syntax that allows us to write HTML in JavaScript, to structure the UI of the App component
+  // **JSX (UI Structure)**
+  // Returning JSX to structure the UI of the app.
   return (
-    // Wrapping the entire app in a div with the class "app" for styling purposes
     <div className="app">
-      {/* Rendering the Header component at the top of the App */}
+      {/* Displaying the app's header */}
       <Header />
 
+      {/* Optionally displaying a Counter component */}
       {/* <Counter /> */}
-      {/* Rendering the CreateArea component, which allows users to create new tasks.
-          Passing the 'addTaskHandler' function as a prop named 'onAdd' so that
-          CreateArea can use it to add new tasks to the task list */}
-      <CreateArea onAdd={addTaskHandler} />
 
-      {/* Rendering the Tasks component, which displays the list of tasks.
-          Passing the current 'allTasks' state as a prop named 'tasks' for display
-          and 'deleteTaskHandler' as a prop named 'onDelete' to enable task deletion */}
+      {/* Component for adding new tasks.
+          Passing `addTaskHandler` as a prop (`onAdd`) so that this component can add tasks */}
+      {/* <CreateArea onAdd={addTaskHandler} /> */}
+
+      {/* Component for displaying tasks.
+          Passing the task list (`allTasks`) and delete functionality (`deleteTaskHandler`) as props */}
       <Tasks tasks={allTasks} onDelete={deleteTaskHandler} />
 
+      {/* Optionally displaying a Weather component */}
       {/* <Weather /> */}
 
-      {/* Rendering the Footer component at the bottom of the App */}
+      {/* Displaying the footer at the bottom */}
       <Footer />
     </div>
   );
 };
 
-// Exporting the App component so it can be imported and used in other parts of the project
+// Exporting the `App` component to use it in other parts of the project.
 export default App;
