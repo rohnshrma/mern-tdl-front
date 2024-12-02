@@ -63,14 +63,14 @@ const App = () => {
       {/* Rendering the CreateArea component, which allows users to create new tasks.
           Passing the 'addTaskHandler' function as a prop named 'onAdd' so that
           CreateArea can use it to add new tasks to the task list */}
-      {/* <CreateArea onAdd={addTaskHandler} /> */}
+      <CreateArea onAdd={addTaskHandler} />
 
       {/* Rendering the Tasks component, which displays the list of tasks.
           Passing the current 'allTasks' state as a prop named 'tasks' for display
           and 'deleteTaskHandler' as a prop named 'onDelete' to enable task deletion */}
-      {/* <Tasks tasks={allTasks} onDelete={deleteTaskHandler} /> */}
+      <Tasks tasks={allTasks} onDelete={deleteTaskHandler} />
 
-      <Weather />
+      {/* <Weather /> */}
 
       {/* Rendering the Footer component at the bottom of the App */}
       <Footer />

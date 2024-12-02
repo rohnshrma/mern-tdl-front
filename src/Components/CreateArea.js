@@ -1,5 +1,5 @@
 // Importing necessary functions and libraries from React
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 // Importing the 'uuid' library to generate unique IDs for tasks
 import { v4 as uuidv4 } from "uuid";
 
@@ -25,6 +25,13 @@ const formReducer = (currentState, action) => {
     return {
       name: currentState.name, // Keep the current name
       description: action.payload, // Update the description with the action's payload
+    };
+  }
+
+  if (action.type === "CLEAR") {
+    return {
+      name: "",
+      description: "",
     };
   }
 
@@ -61,14 +68,16 @@ const CreateArea = (props) => {
     // Create a task object that combines the task's name and description
     // Also generate a unique ID for the task using uuidv4
     const taskObj = {
-      ...formState, // Include all form data (name and description)
       id: uuidv4(), // Add a unique ID for the task
+      ...formState, // Include all form data (name and description)
     };
 
     console.log(taskObj); // Log the task object for debugging purposes
 
     // Call the onAdd function passed as a prop to send the task object to the parent component
     props.onAdd(taskObj);
+
+    dispatch({ type: "CLEAR" });
   };
 
   // Returning the JSX structure for the form
@@ -80,12 +89,14 @@ const CreateArea = (props) => {
           onChange={nameChangeHandler} // Trigger nameChangeHandler whenever the input changes
           type="text" // Input type set to text
           placeholder="Task Name..." // Displayed placeholder text
+          value={formState.name}
         />
       </div>
 
       {/* Input field for the task description */}
       <div className="form-group">
         <input
+          value={formState.description}
           onChange={descChangeHandler} // Trigger descChangeHandler whenever the input changes
           type="text" // Input type set to text
           placeholder="Task Description..." // Displayed placeholder text
